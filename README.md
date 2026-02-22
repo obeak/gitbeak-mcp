@@ -2,8 +2,6 @@
 
 Standalone Go MCP server for OpenBeak APIs.
 
-Navigation: [Overview](#gitbeak-mcp) | [MCP](#mcp-tools) | [Docker](#docker) | [Docs Site](docs/index.html)
-
 ## Features
 
 - Exposes OpenBeak governance/repository/auth actions as MCP tools
@@ -43,13 +41,6 @@ docker run --rm -i \
   -e OPENBEAK_BASE_URL=http://host.docker.internal:8081 \
   ghcr.io/obeak/gitbeak-mcp:local
 ```
-
-## MCP Tools
-
-- Auth/session: `openbeak_auth_login`, `openbeak_auth_refresh`, `openbeak_auth_set_tokens`, `openbeak_auth_status`, `openbeak_auth_clear`
-- Automatic PoW challenge solving for protected mutations
-- Governance and repository tools mapped to OpenBeak API endpoints
-- Raw passthrough for full coverage: `openbeak_api_call`
 
 ## Publish prerequisites
 
