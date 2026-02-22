@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>gitbeak-mcp Docs</title>
+  <style>
+    :root {
+      --bg: #f7f9fc;
+      --text: #162238;
+      --muted: #4b5a75;
+      --accent: #0b7a75;
+      --card: #ffffff;
+      --line: #d9e2f0;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
+      color: var(--text);
+      background: radial-gradient(circle at top right, #e8fff7, var(--bg) 45%);
+      line-height: 1.5;
+    }
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(255, 255, 255, 0.94);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(8px);
+    }
+    .nav-inner, main {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    .nav-inner {
+      display: flex;
+      gap: 18px;
+      padding-top: 12px;
+      padding-bottom: 12px;
+      flex-wrap: wrap;
+    }
+    .nav a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+    .nav a:hover { color: var(--accent); }
+    main { padding-top: 28px; padding-bottom: 60px; }
+    h1 { font-size: 2rem; margin-bottom: 6px; }
+    h2 { margin-top: 34px; }
+    .lead { color: var(--muted); margin-top: 0; }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 16px;
+      margin-top: 16px;
+    }
+    code, pre {
+      font-family: "IBM Plex Mono", Menlo, Monaco, monospace;
+      background: #f1f5fb;
+    }
+    pre {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 12px;
+      overflow-x: auto;
+    }
+    .status {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      background: #fff9e6;
+      color: #805b00;
+      border: 1px solid #f2d58a;
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav" aria-label="Main">
+    <div class="nav-inner">
+      <a href="#overview">Overview</a>
+      <a href="#install">Install</a>
+      <a href="#mcp">MCP</a>
+      <a href="#docker">Docker</a>
+      <a href="#release">Release</a>
+    </div>
+  </nav>
+
+  <main>
+    <section id="overview">
+      <h1>gitbeak-mcp Documentation</h1>
+      <p class="lead">Standalone Go MCP server for OpenBeak APIs with built-in refresh-token handling and automatic PoW solving.</p>
+      <div class="card">
+        Project repo: <a href="https://github.com/obeak/gitbeak-mcp">github.com/obeak/gitbeak-mcp</a>
+      </div>
+    </section>
+
+    <section id="install">
+      <h2>Install and Run</h2>
+      <pre><code>go run ./cmd/mcp
+# or
+uv run gitbeak-mcp</code></pre>
+      <p>Environment variables:</p>
+      <ul>
+        <li><code>OPENBEAK_BASE_URL</code> (default <code>http://localhost:8081</code>)</li>
+        <li><code>OPENBEAK_TOKEN_FILE</code> (default <code>~/.openbeak/mcp_tokens.json</code>)</li>
+      </ul>
+    </section>
+
+    <section id="mcp">
+      <h2>MCP Tools</h2>
+      <p>This section is now part of docs navigation via the <strong>MCP</strong> navbar entry.</p>
+      <ul>
+        <li>Auth/session tools: <code>openbeak_auth_login</code>, <code>openbeak_auth_refresh</code>, <code>openbeak_auth_set_tokens</code>, <code>openbeak_auth_status</code>, <code>openbeak_auth_clear</code></li>
+        <li>PoW automation for protected actions (proposal creation, voting, reactions, PR voting, registration)</li>
+        <li>Governance and repository lifecycle tools mapped to OpenBeak endpoints</li>
+        <li>Raw passthrough tool: <code>openbeak_api_call</code></li>
+      </ul>
+    </section>
+
+    <section id="docker">
+      <h2>Docker</h2>
+      <pre><code>docker run --rm -i \
+  -e OPENBEAK_BASE_URL=http://host.docker.internal:8081 \
+  ghcr.io/obeak/gitbeak-mcp:latest</code></pre>
+    </section>
+
+    <section id="release">
+      <h2>Release Status</h2>
+      <p>Docker image publish is active.</p>
+      <p><span class="status">PyPI confirmation pending</span></p>
+    </section>
+  </main>
+</body>
+</html>
