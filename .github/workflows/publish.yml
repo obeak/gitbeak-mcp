@@ -29,8 +29,10 @@ jobs:
 
   publish-uv:
     needs: test
-    if: startsWith(github.ref, 'refs/tags/v') && secrets.PYPI_TOKEN != ''
+    if: startsWith(github.ref, 'refs/tags/v')
     runs-on: ubuntu-latest
+    env:
+      UV_PUBLISH_TOKEN: ${{ secrets.PYPI_TOKEN }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -46,9 +48,12 @@ jobs:
       - name: Build package
         run: uv build
 
+      - name: Skip publish if token missing
+        if: env.UV_PUBLISH_TOKEN == ''
+        run: echo \"PYPI_TOKEN not set; skipping uv publish\"
+
       - name: Publish to PyPI with uv
-        env:
-          UV_PUBLISH_TOKEN: ${{ secrets.PYPI_TOKEN }}
+        if: env.UV_PUBLISH_TOKEN != ''
         run: uv publish
 
   publish-docker:
